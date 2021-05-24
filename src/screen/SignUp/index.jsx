@@ -33,8 +33,10 @@ export default function SignUp({ navigation }) {
     const handleEmailInput = (value) => setEmail(value);
     const handlePasswordInput = (value) => setPassword(value);
     const handleTermsButton = () => setAgreeTerms(!agreeTerms);
-    const termAndConditionScreen = () => navigation.navigate("TermAndCondition");
-    const backScreen = () => navigation.goBack();
+
+    const handleScreenChange = (screen) => navigation.navigate(screen);
+
+    const isFormComplete = !!(name && email && password && agreeTerms);
 
     return (
         <SafeAreaView style={style.container}>
@@ -46,7 +48,7 @@ export default function SignUp({ navigation }) {
                     <View style={style.content}>
                         <TouchableOpacity
                             style={style.btnBack}
-                            onPress={ backScreen }
+                            onPress={ () => navigation.goBack() }
                         >
                             <Ionicons name="arrow-back" style={style.back}/>
                         </TouchableOpacity>
@@ -100,23 +102,24 @@ export default function SignUp({ navigation }) {
                                     onValueChange={ handleTermsButton }
                                     color={ agreeTerms ? "#0074c7" : null }
                                 />
-                                <Text>I agree to the terms and conditions</Text>
+                                <Text style={{ fontSize: 16 }}>I agree to the terms and conditions</Text>
                             </View>
 
                             <TouchableOpacity 
                                 style={[
                                     style.signup,
-                                    agreeTerms ? { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                                    isFormComplete ? { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
                                 ]}
-                                disabled={ !agreeTerms }
+                                disabled={ !isFormComplete }
+                                onPress={ () => handleScreenChange("SignUpInformation") }
                             >
-                                <Text style={style.txtSignUp}>Sign up</Text>
+                                <Text style={style.txtSignUp}>Next</Text>
                             </TouchableOpacity>
                         </View>
 
                         <TouchableOpacity
                             style={style.footer}
-                            onPress={ termAndConditionScreen }
+                            onPress={ () => handleScreenChange("TermAndCondition") }
                         >
                             <Text style={style.txtHelp}>Terms {'&'} Conditions</Text>
                         </TouchableOpacity>

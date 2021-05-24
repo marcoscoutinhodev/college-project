@@ -63,7 +63,7 @@ const style = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         borderColor: "#555",
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         marginBottom: 50,
     },
     icon: {

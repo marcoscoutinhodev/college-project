@@ -25,6 +25,8 @@ export default function SignUpInformation({ navigation }) {
     const handleInputWeight = (value) => setWeight(value);
     const handleInputHeight = (value) => setHeight(value);
 
+    const isFormComplete = !!(genderOption && weight && height);
+
     return(
         <SafeAreaView style={style.container}>
             <KeyboardAvoidingView
@@ -81,6 +83,7 @@ export default function SignUpInformation({ navigation }) {
                                 <TextInput
                                     style={style.input}
                                     placeholder="Type your weight"
+                                    keyboardType="numeric"
                                     onChangeText={ handleInputWeight }
                                 />
                             </View>
@@ -93,15 +96,18 @@ export default function SignUpInformation({ navigation }) {
                                 <TextInput
                                     style={style.input}
                                     placeholder="Type your height"
+                                    keyboardType="numeric"
                                     onChangeText={ handleInputHeight }
                                 />
                             </View>
 
                             <TouchableOpacity style={[
                                 style.signup,
-                                !!(genderOption && weight && height) ?
+                                isFormComplete ?
                                     { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
-                            ]}>
+                                ]}
+                                disabled={ !isFormComplete }
+                            >
                                 <Text style={style.signupText}>Sign Up</Text>
                             </TouchableOpacity>
                         </View>

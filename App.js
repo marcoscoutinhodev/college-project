@@ -7,6 +7,7 @@ import Login from "./src/screen/Login";
 import SignUp from "./src/screen/SignUp";
 import SignUpInformation from "./src/screen/SignUpInformation";
 import TermAndCondition from "./src/screen/TermAndCondition";
+import Profile from "./src/screen/Profile";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={ SignUp } />
         <Stack.Screen name="SignUpInformation" component={ SignUpInformation } />
         <Stack.Screen name="TermAndCondition" component={ TermAndCondition } />
+        <Stack.Screen name="Profile" component={ Profile } />
       </Stack.Navigator>
     </NavigationContainer>
   );

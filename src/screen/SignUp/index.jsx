@@ -34,8 +34,6 @@ export default function SignUp({ navigation }) {
     const handlePasswordInput = (value) => setPassword(value);
     const handleTermsButton = () => setAgreeTerms(!agreeTerms);
 
-    const handleScreenChange = (screen) => navigation.navigate(screen);
-
     const isFormComplete = !!(name && email && password && agreeTerms);
 
     return (
@@ -111,7 +109,13 @@ export default function SignUp({ navigation }) {
                                     isFormComplete ? { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
                                 ]}
                                 disabled={ !isFormComplete }
-                                onPress={ () => handleScreenChange("SignUpInformation") }
+                                onPress={ () => {
+                                    navigation.navigate("SignUpInformation", {
+                                        name,
+                                        email,
+                                        password,
+                                    });
+                                } }
                             >
                                 <Text style={style.txtSignUp}>Next</Text>
                             </TouchableOpacity>
@@ -119,7 +123,7 @@ export default function SignUp({ navigation }) {
 
                         <TouchableOpacity
                             style={style.footer}
-                            onPress={ () => handleScreenChange("TermAndCondition") }
+                            onPress={ () => navigation.navigate("TermAndCondition") }
                         >
                             <Text style={style.txtHelp}>Terms {'&'} Conditions</Text>
                         </TouchableOpacity>

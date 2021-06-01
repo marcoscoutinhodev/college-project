@@ -39,17 +39,17 @@ export default function Profile({navigation}) {
                     <View style={style.option}>
                         <ProfileOptions
                             text="Edit Profile"
-                            onPress={ navigation.navigate }
+                            navigation={ navigation }
                             changeTo="SignUp"
                         />
                         <ProfileOptions
                             text="Physical Information"
-                            onPress={ navigation.navigate }
+                            navigation={ navigation }
                             changeTo="SignUpInformation"
                         />
                         <ProfileOptions 
                             text="Terms and Conditions" 
-                            onPress={ navigation.navigate }
+                            navigation={ navigation }
                             changeTo="TermAndCondition"
                         />
                     </View>

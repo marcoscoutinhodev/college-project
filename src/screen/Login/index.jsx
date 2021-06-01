@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import style from "./style";
 
 import Logo from "../../../assets/logo.jpg";
+import Button from "../../components/Button";
 
 export default function Login({ navigation }) {
     const [ email, setEmail ] = useState();
@@ -70,17 +71,12 @@ export default function Login({ navigation }) {
                             />
                         </View>
 
-                        <TouchableOpacity
-                            style={[
-                                style.btnLogIn,
-                                isEmailFilled && isPasswordFilled ? 
-                                    { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
-                            ]}
-                            disabled={ !(isEmailFilled && isPasswordFilled) }
-                            onPress={ () => navigation.navigate("Profile") }
-                        >
-                            <Text style={style.text}>Login</Text>
-                        </TouchableOpacity>
+                        <Button
+                            text="Login"
+                            isFilled={ (isEmailFilled && isPasswordFilled) }
+                            navigation={navigation}
+                            changeTo="Profile"
+                        />
                     </View>
                 </TouchableWithoutFeedback>
 

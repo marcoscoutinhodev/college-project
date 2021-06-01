@@ -21,6 +21,8 @@ const style = StyleSheet.create({
     userName: {
         fontSize: 32,
         fontWeight: "bold",
+        width: "50%",
+        textAlign: "center",
     },
     accountSet: {
         width: "80%",

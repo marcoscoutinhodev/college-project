@@ -21,7 +21,8 @@ import Checkbox from "expo-checkbox";
 
 import style from "./style";
 
-import logo from "../../../assets/logo.jpg"
+import Logo from "../../../assets/logo.jpg";
+import Button from "../../components/Button";
 
 export default function SignUp({ navigation }) {
     const [ name, setName ] = useState();
@@ -52,7 +53,7 @@ export default function SignUp({ navigation }) {
                         </TouchableOpacity>
 
                         <Image
-                            source={logo}
+                            source={Logo}
                             style={style.image}
                         />
 
@@ -103,22 +104,17 @@ export default function SignUp({ navigation }) {
                                 <Text style={{ fontSize: 16 }}>I agree to the terms and conditions</Text>
                             </View>
 
-                            <TouchableOpacity 
-                                style={[
-                                    style.signup,
-                                    isFormComplete ? { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
-                                ]}
-                                disabled={ !isFormComplete }
-                                onPress={ () => {
-                                    navigation.navigate("SignUpInformation", {
-                                        name,
-                                        email,
-                                        password,
-                                    });
-                                } }
-                            >
-                                <Text style={style.txtSignUp}>Next</Text>
-                            </TouchableOpacity>
+                            <Button
+                                text="Next"
+                                isFilled={ isFormComplete }
+                                navigation={navigation}
+                                changeTo="SignUpInformation"
+                                params={{
+                                    name,
+                                    email,
+                                    password,
+                                }}
+                            />
                         </View>
 
                         <TouchableOpacity

@@ -13,7 +13,8 @@ import {
 } from  "react-native";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
-import logo from "../../../assets/logo.jpg"
+import Logo from "../../../assets/logo.jpg";
+import Button from "../../components/Button";
 
 import style from "./style";
 
@@ -45,7 +46,7 @@ export default function SignUpInformation({ route, navigation }) {
                         </TouchableOpacity>
 
                         <Image
-                            source={logo}
+                            source={Logo}
                             style={style.image}
                         />
 
@@ -103,15 +104,12 @@ export default function SignUpInformation({ route, navigation }) {
                                 />
                             </View>
 
-                            <TouchableOpacity style={[
-                                style.signup,
-                                isFormComplete ?
-                                    { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
-                                ]}
-                                disabled={ !isFormComplete }
-                            >
-                                <Text style={style.signupText}>Sign Up</Text>
-                            </TouchableOpacity>
+                            <Button 
+                                text="Sign up"
+                                isFilled={ isFormComplete }
+                                navigation={ navigation }
+                                changeTo="Profile"
+                            />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

@@ -52,22 +52,9 @@ const Style = StyleSheet.create({
         alignItems: "center",
         marginTop: 20,
     },
-    signup: {
-        backgroundColor: "#0074c7",
-        width: "100%",
-        marginTop: 30,
-        borderRadius: 15,
-    },
-    txtSignUp: {
-        fontSize: 26,
-        fontWeight: "bold",
-        color: "#FFF",
-        textTransform: "uppercase",
-        textAlign: "center",
-    },
     footer: {
         position: "absolute",
-        bottom: 25,
+        bottom: 20,
         backgroundColor: "#0074c7",
         paddingHorizontal: 15,
         borderRadius: 10,
@@ -75,7 +62,7 @@ const Style = StyleSheet.create({
     txtHelp: {
         color: "#FFF",
         fontSize: 16,
-    }
+    },
 });
 
 export default Style;

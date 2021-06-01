@@ -9,7 +9,7 @@ const Style = StyleSheet.create({
     },
     form: {
         flex: 1,
-        width: "100%",
+        width: "70%",
         justifyContent: "center",
         alignItems: "center",
     },
@@ -19,7 +19,7 @@ const Style = StyleSheet.create({
         borderRadius: 10,
     },
     input: {
-        width: "70%",
+        width: "100%",
         marginTop: 50,
         textAlign: "center",
     },
@@ -40,21 +40,6 @@ const Style = StyleSheet.create({
         alignItems: "center",
         borderBottomWidth: 2,
         borderColor: "#555",
-    },
-    btnLogIn: {
-        width: "70%",
-        backgroundColor: "#0074c7",
-        height: 38,
-        paddingHorizontal: 15,
-        borderRadius: 10,
-        marginTop: 50,
-    },
-    text: {
-        fontSize: 26,
-        fontWeight: "bold",
-        textAlign: "center",
-        color: "#FFF",
-        textTransform: "uppercase",
     },
     footer: {
         width: "100%",

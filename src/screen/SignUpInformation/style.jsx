@@ -28,7 +28,7 @@ const style = StyleSheet.create({
         marginBottom: 20,
     },
     inputs: {
-        width: "60%",
+        width: "70%",
         alignItems: "center",
         marginTop: 30,
     },

@@ -77,6 +77,7 @@ export default function Login({ navigation }) {
                                     { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
                             ]}
                             disabled={ !(isEmailFilled && isPasswordFilled) }
+                            onPress={ () => navigation.navigate("Profile") }
                         >
                             <Text style={style.text}>Login</Text>
                         </TouchableOpacity>

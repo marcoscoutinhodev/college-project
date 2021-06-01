@@ -27,7 +27,7 @@ const Style = StyleSheet.create({
         borderRadius: 10,
     },
     form: {
-        width: "60%",
+        width: "70%",
         alignItems: "center",
         marginTop: 20,
     },

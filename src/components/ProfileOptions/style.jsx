@@ -6,6 +6,9 @@ const style = StyleSheet.create({
         alignItems: "center",
         width: "90%",
         justifyContent: "space-between",
+        backgroundColor: "#FFF",
+        padding: 6,
+        borderRadius: 10,
     },
     text: {
         fontSize: 20,

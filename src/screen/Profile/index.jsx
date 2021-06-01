@@ -14,7 +14,7 @@ import Logo from "../../../assets/logo_opacity.jpeg";
 
 import style from "./style";
 
-export default function Profile() {
+export default function Profile({navigation}) {
     const [ notification, setNotification ] = useState(false);
     const [ backUp, setBackUp ] = useState(false);
 
@@ -37,9 +37,21 @@ export default function Profile() {
                 <View style={style.accountSet}>
                     <Text style={style.text}>Account Settings</Text>
                     <View style={style.option}>
-                        <ProfileOptions text="Edit Profile" />
-                        <ProfileOptions text="Physical Information" />
-                        <ProfileOptions text="Terms and Conditions" />
+                        <ProfileOptions
+                            text="Edit Profile"
+                            onPress={ navigation.navigate }
+                            changeTo="SignUp"
+                        />
+                        <ProfileOptions
+                            text="Physical Information"
+                            onPress={ navigation.navigate }
+                            changeTo="SignUpInformation"
+                        />
+                        <ProfileOptions 
+                            text="Terms and Conditions" 
+                            onPress={ navigation.navigate }
+                            changeTo="TermAndCondition"
+                        />
                     </View>
                     
                     <View style={style.switch}>

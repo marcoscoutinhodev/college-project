@@ -18,7 +18,7 @@ import logo from "../../../assets/logo.jpg"
 import style from "./style";
 
 export default function SignUpInformation({ route, navigation }) {
-    const { name, email, password } = route.params;
+    const { name, email, password } = route.params || {};
 
     const [ genderOption, setGenderOption ] = useState();
     const [ weight, setWeight ] = useState();

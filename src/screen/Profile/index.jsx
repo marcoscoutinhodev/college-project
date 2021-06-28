@@ -28,11 +28,14 @@ export default function Profile({route, navigation}) {
     const [ notification, setNotification ] = useState(false);
     const [ backUp, setBackUp ] = useState(false);
 
+    const waterPerDay = weight * 35;
+
     let langOption = {};
 
     switch (lang) {
         case "english":
             langOption = {
+                waterInfo: `You need ${waterPerDay} liters of water per day`,
                 accSet: "Account Settings",
                 editProf: "Edit Profile",
                 physcInf: "Physical Information",
@@ -44,6 +47,7 @@ export default function Profile({route, navigation}) {
 
         case "portugues":
             langOption = {
+                waterInfo: `Você precisa de ${waterPerDay} litros de água por dia`,
                 accSet: "Configuracao de Conta",
                 editProf: "Editar Perfil",
                 physcInf: "Informacoes Fisicas",
@@ -55,6 +59,7 @@ export default function Profile({route, navigation}) {
 
         case "espanol":
             langOption = {
+                waterInfo: `Necesitas ${waterPerDay} litros de agua al día`,
                 accSet: "Configuraciones de la cuenta",
                 editProf: "Editar perfil",
                 physcInf: "Información Física",
@@ -90,6 +95,10 @@ export default function Profile({route, navigation}) {
                     />
                     <Text style={style.userName}>{name}</Text>
                 </View>
+
+                <Text style={style.waterInfo}>
+                    {langOption.waterInfo}
+                </Text>
 
                 <View style={style.accountSet}>
                     <Text style={style.text}>{langOption.accSet}</Text>

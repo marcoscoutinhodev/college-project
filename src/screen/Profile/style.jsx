@@ -24,6 +24,10 @@ const style = StyleSheet.create({
         width: "50%",
         textAlign: "center",
     },
+    waterInfo: {
+        fontSize: 22,
+        fontWeight: "bold",
+    },
     accountSet: {
         width: "80%",
     },

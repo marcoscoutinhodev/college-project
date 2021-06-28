@@ -45,8 +45,6 @@ export default function Login({ navigation }) {
 
         if(user.email === email && user.password === password) {
             navigation.navigate("Profile", user);
-        } else {
-            Alert.alert("Incorrect password or email", `${user.name} ${user.email} ${user.password} ${user.genderOption} ${user.weight} ${user.height}`);
         }
     }
 

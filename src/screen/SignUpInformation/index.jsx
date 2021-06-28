@@ -10,11 +10,12 @@ import {
     TextInput,
     Platform,
     TouchableOpacity,
+    Alert,
 } from  "react-native";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Logo from "../../../assets/logo.jpg";
-import Button from "../../components/Button";
 
 import style from "./style";
 
@@ -29,6 +30,14 @@ export default function SignUpInformation({ route, navigation }) {
     const handleInputHeight = (value) => setHeight(value);
 
     const isFormComplete = !!(genderOption && weight && height);
+
+    async function saveData(obj) {
+        await AsyncStorage.setItem("user", JSON.stringify(obj));
+
+        Alert.alert("Dado Salvo");
+
+        navigation.navigate("Login");
+    }
 
     return(
         <SafeAreaView style={style.container}>
@@ -104,12 +113,27 @@ export default function SignUpInformation({ route, navigation }) {
                                 />
                             </View>
 
-                            <Button 
-                                text="Sign up"
-                                isFilled={ isFormComplete }
-                                navigation={ navigation }
-                                changeTo="Profile"
-                            />
+                            <TouchableOpacity
+                                style={[
+                                    style.button,
+                                    isFormComplete ? { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                                ]}
+                                disabled={ !isFormComplete }
+                                onPress={() => {
+                                    const userInfo = {
+                                        name,
+                                        email,
+                                        password,
+                                        genderOption,
+                                        weight,
+                                        height,
+                                    };
+
+                                    saveData(userInfo);
+                                }}
+                            >
+                                <Text style={style.text}>Sign Up</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

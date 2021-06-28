@@ -14,7 +14,16 @@ import Logo from "../../../assets/logo_opacity.jpeg";
 
 import style from "./style";
 
-export default function Profile({navigation}) {
+export default function Profile({route, navigation}) {
+    const {
+        name,
+        email,
+        password,
+        gender,
+        weight,
+        height,
+    } = route.params;
+
     const [ notification, setNotification ] = useState(false);
     const [ backUp, setBackUp ] = useState(false);
 
@@ -26,12 +35,12 @@ export default function Profile({navigation}) {
             >
                 <View style={style.userInfo}>
                     <UserAvatar
-                        userName="User Name"
+                        userName={name}
                         size={200}
                         backgroundColor="#0074c7"
                         textColor="#FFF"
                     />
-                    <Text style={style.userName}>User Name</Text>
+                    <Text style={style.userName}>{name}</Text>
                 </View>
 
                 <View style={style.accountSet}>
@@ -46,6 +55,11 @@ export default function Profile({navigation}) {
                             text="Physical Information"
                             navigation={ navigation }
                             changeTo="SignUpInformation"
+                            props={{
+                                name,
+                                email,
+                                password
+                            }}
                         />
                         <ProfileOptions 
                             text="Terms and Conditions" 
@@ -59,6 +73,8 @@ export default function Profile({navigation}) {
                         <Switch 
                             value={ notification }
                             onValueChange={ () => setNotification(!notification) }
+                            trackColor={{ true: "#0074c7", false: "grey" }}
+                            thumbColor={ notification ? "#0074c7" : "white" }
                         />
                     </View>
 
@@ -67,6 +83,8 @@ export default function Profile({navigation}) {
                         <Switch 
                             value={ backUp }
                             onValueChange={ () => setBackUp(!backUp) }
+                            trackColor={{ true: "#0074c7", false: "grey" }}
+                            thumbColor={ backUp ? "#0074c7" : "white" }
                         />
                     </View>
                 </View>

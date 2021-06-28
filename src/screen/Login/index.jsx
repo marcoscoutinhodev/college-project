@@ -9,14 +9,15 @@ import {
     Text,
     TouchableOpacity,
     Keyboard,
+    Alert,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import style from "./style";
 
 import Logo from "../../../assets/logo.jpg";
-import Button from "../../components/Button";
 
 export default function Login({ navigation }) {
     const [ email, setEmail ] = useState();
@@ -35,6 +36,19 @@ export default function Login({ navigation }) {
     }
 
     const signUpScreen = () => navigation.navigate("SignUp");
+
+    
+    async function verifyData() {
+        const userJson = await AsyncStorage.getItem("user");
+
+        const user = JSON.parse(userJson);
+
+        if(user.email === email && user.password === password) {
+            navigation.navigate("Profile", user);
+        } else {
+            Alert.alert("Incorrect password or email", `${user.name} ${user.email} ${user.password} ${user.genderOption} ${user.weight} ${user.height}`);
+        }
+    }
 
     return (
         <SafeAreaView style={style.container}>
@@ -70,13 +84,18 @@ export default function Login({ navigation }) {
                                 secureTextEntry={true}
                             />
                         </View>
-
-                        <Button
-                            text="Login"
-                            isFilled={ (isEmailFilled && isPasswordFilled) }
-                            navigation={navigation}
-                            changeTo="Profile"
-                        />
+                        
+                        <TouchableOpacity
+                            style={[
+                                style.button,
+                                (isEmailFilled && isPasswordFilled) ? 
+                                    { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                            ]}
+                            disabled={ !(isEmailFilled && isPasswordFilled) }
+                            onPress={() => { verifyData() }}
+                        >
+                            <Text style={style.text}>Login</Text>
+                        </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
 

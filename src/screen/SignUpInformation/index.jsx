@@ -20,7 +20,7 @@ import Logo from "../../../assets/logo.jpg";
 import style from "./style";
 
 export default function SignUpInformation({ route, navigation }) {
-    const { name, email, password } = route.params || {};
+    const { name, email, password, lang } = route.params || {};
 
     const [ genderOption, setGenderOption ] = useState();
     const [ weight, setWeight ] = useState();
@@ -34,9 +34,49 @@ export default function SignUpInformation({ route, navigation }) {
     async function saveData(obj) {
         await AsyncStorage.setItem("user", JSON.stringify(obj));
 
-        Alert.alert("Dado Salvo");
+        Alert.alert(langOption.accCreated);
 
         navigation.navigate("Login");
+    }
+
+    let langOption = {};
+
+    switch (lang) {
+        case "english":
+            langOption = {
+                selectGender: "Select your gender bellow",
+                male: "Male",
+                female: "Female",
+                weight: "Type your weight",
+                height: "Type your height",
+                signUp: "Sign Up",
+                accCreated: "Account created successfully",
+            }
+            break;
+
+        case "portugues":
+            langOption = {
+                selectGender: "Selecione seu genero abaixo",
+                male: "Masculino",
+                female: "Feminino",
+                weight: "Digite seu peso",
+                height: "Digite sua altura",
+                signUp: "Criar Conta",
+                accCreated: "Conta criada com sucesso",
+            }
+            break;
+
+        case "espanol":
+            langOption = {
+                selectGender: "Seleccione su género a continuación",
+                male: "Hombre",
+                female: "Mujer",
+                weight: "Escriba su peso",
+                height: "Escriba su altura",
+                signUp: "Inscribirse",
+                accCreated: "Cuenta creada con éxito",
+            }
+            break;
     }
 
     return(
@@ -61,7 +101,7 @@ export default function SignUpInformation({ route, navigation }) {
 
                         <View style={style.inputs}>
                             <View style={style.selectGender}>
-                                <Text style={style.selectTitle}>Select your gender bellow</Text>
+                                <Text style={style.selectTitle}>{langOption.selectGender}</Text>
                                 <View style={style.gender}>
                                     <TouchableOpacity
                                         style={[
@@ -71,7 +111,7 @@ export default function SignUpInformation({ route, navigation }) {
                                         ]}
                                         onPress={ () => setGenderOption("male") }    
                                     >
-                                        <Text style={style.genderTitle}>Male</Text>
+                                        <Text style={style.genderTitle}>{langOption.male}</Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
@@ -82,7 +122,7 @@ export default function SignUpInformation({ route, navigation }) {
                                         ]}
                                         onPress={ () => setGenderOption("female") }    
                                     >
-                                        <Text style={style.genderTitle}>Female</Text>
+                                        <Text style={style.genderTitle}>{langOption.female}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -94,7 +134,7 @@ export default function SignUpInformation({ route, navigation }) {
                                 <MaterialCommunityIcons name="human-male-height" style={style.icon} />
                                 <TextInput
                                     style={style.input}
-                                    placeholder="Type your weight"
+                                    placeholder={langOption.weight}
                                     keyboardType="numeric"
                                     onChangeText={ handleInputWeight }
                                 />
@@ -107,7 +147,7 @@ export default function SignUpInformation({ route, navigation }) {
                                 <MaterialCommunityIcons name="human-male-height-variant" style={style.icon} />
                                 <TextInput
                                     style={style.input}
-                                    placeholder="Type your height"
+                                    placeholder={langOption.height}
                                     keyboardType="numeric"
                                     onChangeText={ handleInputHeight }
                                 />
@@ -132,7 +172,7 @@ export default function SignUpInformation({ route, navigation }) {
                                     saveData(userInfo);
                                 }}
                             >
-                                <Text style={style.text}>Sign Up</Text>
+                                <Text style={style.text}>{langOption.signUp}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

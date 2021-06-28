@@ -24,6 +24,7 @@ export default function Login({ navigation }) {
     const [ password, setPassword ] = useState();
     const [ isEmailFilled, setIsEmailFilled ] = useState(false);
     const [ isPasswordFilled, setIsPasswordFilled ] = useState(false);
+    const [ lang, setLang ] = useState("english");
 
     const handleEmailInputChange = (value) => {
         setEmail(value);
@@ -35,17 +36,56 @@ export default function Login({ navigation }) {
         setIsPasswordFilled(!!value);
     }
 
-    const signUpScreen = () => navigation.navigate("SignUp");
+    const signUpScreen = () => navigation.navigate("SignUp", { lang });
 
-    
     async function verifyData() {
         const userJson = await AsyncStorage.getItem("user");
 
         const user = JSON.parse(userJson);
+        user.lang = lang;
 
         if(user.email === email && user.password === password) {
             navigation.navigate("Profile", user);
+        } else {
+            Alert.alert(langOption.invalidLogin);
         }
+    }
+
+    let langOption = {};
+
+    switch (lang) {
+        case "english":
+            langOption = {
+                email: "Email",
+                password: "Password",
+                selectLang: "Select your language",
+                login: "Login",
+                createAcc: "Create Account",
+                invalidLogin: "Invalid Login"
+            }
+            break;
+
+        case "portugues":
+            langOption = {
+                email: "Email",
+                password: "Senha",
+                selectLang: "Selecione seu idioma",
+                login: "Login",
+                createAcc: "Criar Conta",
+                invalidLogin: "Login Invalido"
+            }
+            break;
+
+        case "espanol":
+            langOption = {
+                email: "Email",
+                password: "Contraseña",
+                selectLang: "Elige tu idioma",
+                login: "Acceso",
+                createAcc: "Crear una cuenta",
+                invalidLogin: "Ingreso invalido"
+            }
+            break;
     }
 
     return (
@@ -65,7 +105,7 @@ export default function Login({ navigation }) {
                             <FontAwesome5 name="user-alt" style={style.icon}/>
                             <TextInput  
                                 style={style.input}
-                                placeholder="Email"
+                                placeholder={langOption.email}
                                 onChangeText={ handleEmailInputChange }
                             />
                         </View>
@@ -77,10 +117,61 @@ export default function Login({ navigation }) {
                             <MaterialCommunityIcons name="onepassword" style={style.icon}/>
                             <TextInput  
                                 style={style.input}
-                                placeholder="Password"
+                                placeholder={langOption.password}
                                 onChangeText={ handlePasswordInputChange }
-                                secureTextEntry={true}
+                                secureTextEntry={password ? true : false}
                             />
+                        </View>
+
+                        <Text style={{
+                            fontSize: 26,
+                            color: "#000",
+                            marginTop: 20,
+                        }}>{langOption.selectLang}</Text>
+                        <View style={[
+                            style.languages,
+                        ]}>
+                            <TouchableOpacity
+                                style={[
+                                    style.btn,
+                                    lang === "english" ?
+                                        { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                                ]}
+                                onPress={ () => {
+                                    setLang("english");
+                                    setPassword('');
+                                }}  
+                            >
+                                <Text style={style.txt}>English</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[
+                                    style.btn,
+                                    lang === "portugues" ?
+                                        { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                                ]}
+                                onPress={ () => {
+                                    setLang("portugues");
+                                    setPassword('');
+                                }}  
+                            >
+                                <Text style={style.txt}>Portugues</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[
+                                    style.btn,
+                                    lang === "espanol" ?
+                                        { backgroundColor: "#0074c7" } : { backgroundColor: "#555" }
+                                ]}
+                                onPress={ () => {
+                                    setLang("espanol");
+                                    setPassword('');
+                                }}  
+                            >
+                                <Text style={style.txt}>Espanol</Text>
+                            </TouchableOpacity>
                         </View>
                         
                         <TouchableOpacity
@@ -92,7 +183,7 @@ export default function Login({ navigation }) {
                             disabled={ !(isEmailFilled && isPasswordFilled) }
                             onPress={() => { verifyData() }}
                         >
-                            <Text style={style.text}>Login</Text>
+                            <Text style={style.text}>{langOption.login}</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
@@ -102,11 +193,7 @@ export default function Login({ navigation }) {
                         style={style.btnFooter}
                         onPress={ signUpScreen }
                     >
-                        <Text style={style.footerText}>Create Account</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={style.btnFooter}>
-                        <Text style={style.footerText}>Need Help?</Text>
+                        <Text style={style.footerText}>{langOption.createAcc}</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>

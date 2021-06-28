@@ -24,7 +24,8 @@ import style from "./style";
 import Logo from "../../../assets/logo.jpg";
 import Button from "../../components/Button";
 
-export default function SignUp({ navigation }) {
+export default function SignUp({ route, navigation }) {
+    const lang = route.params.lang;
     const [ name, setName ] = useState();
     const [ email, setEmail ] = useState();
     const [ password, setPassword ] = useState();
@@ -36,6 +37,43 @@ export default function SignUp({ navigation }) {
     const handleTermsButton = () => setAgreeTerms(!agreeTerms);
 
     const isFormComplete = !!(name && email && password && agreeTerms);
+
+    let langOption = {};
+
+    switch (lang) {
+        case "english":
+            langOption = {
+                fullName: "Full Name",
+                email: "Email",
+                password: "Password",
+                agreeTerms: "I agree to the terms and conditions",
+                next: "Next",
+                termsCond: "Terms & Conditions",
+            }
+            break;
+
+        case "portugues":
+            langOption = {
+                fullName: "Nome Completo",
+                email: "Email",
+                password: "Senha",
+                agreeTerms: "Eu concordo com os termos e condicoes",
+                next: "Proximo",
+                termsCond: "Termos & Condicoes",
+            }
+            break;
+
+        case "espanol":
+            langOption = {
+                fullName: "Nombre Completo",
+                email: "Email",
+                password: "Contraseña",
+                agreeTerms: "Estoy de acuerdo con los términos y condiciones",
+                next: "Próximo",
+                termsCond: "Términos y condiciones",
+            }
+            break;
+    }
 
     return (
         <SafeAreaView style={style.container}>
@@ -65,7 +103,7 @@ export default function SignUp({ navigation }) {
                                 <MaterialIcons name="drive-file-rename-outline" style={style.icon} />
                                 <TextInput 
                                     style={style.textInput}
-                                    placeholder="Full Name"
+                                    placeholder={langOption.fullName}
                                     onChangeText={ handleNameInput }
                                 />
                             </View>
@@ -77,7 +115,7 @@ export default function SignUp({ navigation }) {
                                 <FontAwesome5 name="user-alt" style={style.icon} />
                                 <TextInput 
                                     style={style.textInput}
-                                    placeholder="Email"
+                                    placeholder={langOption.email}
                                     onChangeText={ handleEmailInput }
                                 />
                             </View>
@@ -89,7 +127,7 @@ export default function SignUp({ navigation }) {
                                 <MaterialCommunityIcons name="onepassword" style={style.icon} />
                                 <TextInput
                                     style={style.textInput}
-                                    placeholder="Password"
+                                    placeholder={langOption.password}
                                     onChangeText={ handlePasswordInput }
                                     secureTextEntry={ true }
                                 />
@@ -101,11 +139,11 @@ export default function SignUp({ navigation }) {
                                     onValueChange={ handleTermsButton }
                                     color={ agreeTerms ? "#0074c7" : null }
                                 />
-                                <Text style={{ fontSize: 16 }}>I agree to the terms and conditions</Text>
+                                <Text style={{ fontSize: 16 }}>{langOption.agreeTerms}</Text>
                             </View>
 
                             <Button
-                                text="Next"
+                                text={langOption.next}
                                 isFilled={ isFormComplete }
                                 navigation={navigation}
                                 changeTo="SignUpInformation"
@@ -113,15 +151,16 @@ export default function SignUp({ navigation }) {
                                     name,
                                     email,
                                     password,
+                                    lang,
                                 }}
                             />
                         </View>
 
                         <TouchableOpacity
                             style={style.footer}
-                            onPress={ () => navigation.navigate("TermAndCondition") }
+                            onPress={ () => navigation.navigate("TermAndCondition", { lang }) }
                         >
-                            <Text style={style.txtHelp}>Terms {'&'} Conditions</Text>
+                            <Text style={style.txtHelp}>{langOption.termsCond}</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>

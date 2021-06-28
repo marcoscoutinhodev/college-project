@@ -41,6 +41,7 @@ const style = StyleSheet.create({
         fontSize: 18,
         textTransform: "uppercase",
         textDecorationLine: "underline",
+        textAlign: "center",
     },
     gender: {
         width: "100%",
@@ -49,7 +50,7 @@ const style = StyleSheet.create({
         padding: 15,
     },
     genderButton: {
-        width: 100,
+        width: "40%",
         backgroundColor: "#555",
         padding: 10,
         borderRadius: 15,
@@ -75,6 +76,24 @@ const style = StyleSheet.create({
     input: {
         fontSize: 18,
         textAlign: "center",
+    },
+    languages: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+    },
+    btn: {
+        backgroundColor: "#0074c7",
+        height: 38,
+        paddingHorizontal: 15,
+        borderRadius: 15,
+        marginTop: 20,
+        justifyContent: "center",
+    },
+    txt: {
+        fontSize: 18,
+        color: "#FFF",
     },
     signup: {
         backgroundColor: "#555",

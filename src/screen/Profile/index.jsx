@@ -22,10 +22,58 @@ export default function Profile({route, navigation}) {
         gender,
         weight,
         height,
+        lang,
     } = route.params;
 
     const [ notification, setNotification ] = useState(false);
     const [ backUp, setBackUp ] = useState(false);
+
+    let langOption = {};
+
+    switch (lang) {
+        case "english":
+            langOption = {
+                accSet: "Account Settings",
+                editProf: "Edit Profile",
+                physcInf: "Physical Information",
+                termsCond: "Terms and Conditions",
+                notif: "Notification",
+                bkUp: "Back Up",
+            }
+            break;
+
+        case "portugues":
+            langOption = {
+                accSet: "Configuracao de Conta",
+                editProf: "Editar Perfil",
+                physcInf: "Informacoes Fisicas",
+                termsCond: "Termos e Condicoes",
+                notif: "Notificacao",
+                bkUp: "Back Up",
+            }
+            break;
+
+        case "espanol":
+            langOption = {
+                accSet: "Configuraciones de la cuenta",
+                editProf: "Editar perfil",
+                physcInf: "Información Física",
+                termsCond: "Términos y condiciones",
+                notif: "Notificación",
+                bkUp: "Back Up",
+            }
+            break;
+        default:
+            langOption = {
+                accSet: "Account Settings",
+                editProf: "Edit Profile",
+                physcInf: "Physical Information",
+                termsCond: "Terms and Conditions",
+                notif: "Notification",
+                bkUp: "Back Up",
+            }
+            break;
+    }
 
     return (
         <SafeAreaView style={style.container}>
@@ -44,32 +92,39 @@ export default function Profile({route, navigation}) {
                 </View>
 
                 <View style={style.accountSet}>
-                    <Text style={style.text}>Account Settings</Text>
+                    <Text style={style.text}>{langOption.accSet}</Text>
                     <View style={style.option}>
                         <ProfileOptions
-                            text="Edit Profile"
+                            text={langOption.editProf}
                             navigation={ navigation }
                             changeTo="SignUp"
+                            props={{
+                                lang
+                            }}
                         />
                         <ProfileOptions
-                            text="Physical Information"
+                            text={langOption.physcInf}
                             navigation={ navigation }
                             changeTo="SignUpInformation"
                             props={{
                                 name,
                                 email,
-                                password
+                                password,
+                                lang
                             }}
                         />
                         <ProfileOptions 
-                            text="Terms and Conditions" 
+                            text={langOption.termsCond}
                             navigation={ navigation }
                             changeTo="TermAndCondition"
+                            props={{
+                                lang
+                            }}
                         />
                     </View>
                     
                     <View style={style.switch}>
-                        <Text style={style.text}>Notifications</Text>
+                        <Text style={style.text}>{langOption.notif}</Text>
                         <Switch 
                             value={ notification }
                             onValueChange={ () => setNotification(!notification) }

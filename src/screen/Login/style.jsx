@@ -43,8 +43,8 @@ const Style = StyleSheet.create({
     },
     footer: {
         width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-around",
+        justifyContent: "center",
+        alignItems: "center",
         marginBottom: 30,
     },
     btnFooter: {
@@ -74,6 +74,24 @@ const Style = StyleSheet.create({
         textAlign: "center",
         color: "#FFF",
         textTransform: "uppercase",
+    },
+    languages: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+    },
+    btn: {
+        backgroundColor: "#0074c7",
+        height: 38,
+        paddingHorizontal: 15,
+        borderRadius: 15,
+        marginTop: 20,
+        justifyContent: "center",
+    },
+    txt: {
+        fontSize: 18,
+        color: "#FFF",
     },
 });
 
